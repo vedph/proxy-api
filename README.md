@@ -2,7 +2,7 @@
 
 A simple proxy API to get around CORS issues. You can use this to add an endpoint to your API.
 
-For a typical Cadmus API and app, follow the instructions below.
+👉 For a typical Cadmus API and app, follow the instructions below.
 
 ## API
 
@@ -53,6 +53,8 @@ public sealed class ProxyController : ControllerBase
 }
 ```
 
+>The response cache duration is expressed in seconds.
+
 This requires CORS, which should already be setup for the API, and the following services:
 
 ```cs
@@ -71,7 +73,7 @@ app.UseResponseCaching();
 
 ## Angular App
 
-Once you provide this proxy endpoint, **configure the Angular app** like this:
+Once you provide this proxy endpoint, **configure the Angular app** like this (as a sample, here I'm configuring the interceptor for DBPedia):
 
 ```ts
 { provide: HTTP_INTERCEPTORS, useClass: ProxyInterceptor, multi: true },
@@ -85,4 +87,4 @@ Once you provide this proxy endpoint, **configure the Angular app** like this:
 },
 ```
 
-This configures the [Cadmus bricks proxy interceptor](https://github.com/vedph/cadmus-bricks-shell), whose task is intercepting requests to services not supporting CORS, like DBPedia, and rewrite them so that they are redirected to the proxy service endpoint shown above under (1). Using a proxy bypasses the issues of browsers in consuming services not providing support for CORS or JSONP.
+This configures the [Cadmus bricks proxy interceptor](https://github.com/vedph/cadmus-bricks-shell), whose task is intercepting requests to services not supporting CORS, like DBPedia, and rewrite them so that they are redirected to the proxy service endpoint shown above. Using a proxy bypasses the issues of browsers in consuming services not providing support for CORS or JSONP.
